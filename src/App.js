@@ -15,7 +15,7 @@ function App() {
   }, []); // blank to run only on first launch
 
   function getTodos() {
-    db.collection("todos").onSnapshot(function (querySnapshot) {
+    db.collection("todos").orderBy('timestamp','desc').onSnapshot(function (querySnapshot) {
       setTodos(
         querySnapshot.docs.map((doc) => ({
           id: doc.id,
@@ -29,7 +29,7 @@ function App() {
   function addTodo(e) {
     e.preventDefault();
 
-    if(todoInput!=""){
+    if(todoInput!==""){
 
       db.collection("todos").add({
 
